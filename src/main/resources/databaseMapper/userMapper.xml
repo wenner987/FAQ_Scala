@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="grp.faq.dao.UserDAO">
-
+<!--    UserEntity selectByName(String userName);-->
+    <select id="selectByName" resultType="grp.faq.entity.UserEntity" parameterType="java.lang.String">
+        select * fron TB_USER where #(userName)
+    </select>
 
 </mapper>

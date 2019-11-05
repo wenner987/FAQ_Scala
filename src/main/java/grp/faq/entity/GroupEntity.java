@@ -1,33 +1,33 @@
 package grp.faq.entity;
 
 public class GroupEntity {
-    Long cGid = null;
-    String cDesc = null;
-    Short isDelete = null;
+    private Long gid = null;
+    private String groupName = null;
+    private String desc = null;
+    private Short isDelete = 0;
 
-    @Override
-    public String toString() {
-        return "GroupEntity{" +
-                "cGid=" + cGid +
-                ", cDesc='" + cDesc + '\'' +
-                ", isDelete=" + isDelete +
-                '}';
+    public Long getGid() {
+        return gid;
     }
 
-    public Long getcGid() {
-        return cGid;
+    public void setGid(Long gid) {
+        this.gid = gid;
     }
 
-    public void setcGid(Long cGid) {
-        this.cGid = cGid;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public String getcDesc() {
-        return cDesc;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public void setcDesc(String cDesc) {
-        this.cDesc = cDesc;
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Short getIsDelete() {

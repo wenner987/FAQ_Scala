@@ -4,8 +4,19 @@
 <mapper namespace="grp.faq.dao.GroupDAO">
 
 <!--    GroupEntity insertGroup(GroupEntity groupEntity);-->
-    <insert id="insertGroup" parameterType="grp.faq.entity.GroupEntity" useGeneratedKeys="true" keyProperty="cGid">
-        INSERT INTO TB_GROUP VALUES (#{cGid},#{cDesc},#{isDelete})
+    <insert id="insertGroup" parameterType="grp.faq.entity.GroupEntity" useGeneratedKeys="true" keyProperty="gid">
+        INSERT INTO TB_GROUP(C_GID,C_GROUP_NAME,C_DESC,C_IS_DELETE) VALUES (#{gid},#{groupName},#{desc},#{isDelete})
     </insert>
-
+<!--    List selectAll();-->
+    <select id="selectAll" resultType="List">
+        SELECT * FROM TB_GROUP
+    </select>
+<!--    GroupEntity selectByName(@Param("name")String name);-->
+    <select id="selectByName" resultType="grp.faq.entity.GroupEntity">
+        SELECT * FROM TB_GROUP WHERE C_GROUP_NAME=#{name}
+    </select>
+<!--    int deleteByName(@Param("name")String name);-->
+    <select id="deleteByName">
+        UPDATE TB_GROUP SET C_IS_DELETE=1 WHERE C_GID IN (SELECT C_GID FROM C_GROUP WHERE C_GOURP_NAME=#{name})
+    </select>
 </mapper>
