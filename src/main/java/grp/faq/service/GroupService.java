@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface GroupService {
 
-    Boolean insertGroup(String name, String desc);
+    void insertGroup(String name, String desc) throws Exception;
 
     Boolean deleteGroup(String name);
 
     GroupEntity selectByName(String name);
 
     List<GroupEntity> selectAll();
+
+    List<GroupEntity> selectPagination(Integer index);
 }

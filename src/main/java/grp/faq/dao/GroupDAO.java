@@ -15,4 +15,6 @@ public interface GroupDAO {
 
     int deleteByName(@Param("name")String name);
 
+    List selectPagination(@Param("index") Integer index);
+
 }

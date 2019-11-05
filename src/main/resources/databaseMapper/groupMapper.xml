@@ -8,12 +8,12 @@
         INSERT INTO TB_GROUP(C_GID,C_GROUP_NAME,C_DESC,C_IS_DELETE) VALUES (#{gid},#{groupName},#{desc},#{isDelete})
     </insert>
 <!--    List selectAll();-->
-    <select id="selectAll" resultType="List">
-        SELECT * FROM TB_GROUP
+    <select id="selectAll" resultType="grp.faq.entity.GroupEntity">
+        SELECT C_GID gid, C_GROUP_NAME groupName, C_DESC gdesc FROM TB_GROUP WHERE C_IS_DELETE=0
     </select>
 <!--    GroupEntity selectByName(@Param("name")String name);-->
     <select id="selectByName" resultType="grp.faq.entity.GroupEntity">
-        SELECT * FROM TB_GROUP WHERE C_GROUP_NAME=#{name}
+        SELECT C_GID gid, C_GROUP_NAME groupName, C_DESC gdesc FROM TB_GROUP WHERE C_GROUP_NAME=#{name} AND C_IS_DELETE=0
     </select>
 <!--    int deleteByName(@Param("name")String name);-->
     <select id="deleteByName">

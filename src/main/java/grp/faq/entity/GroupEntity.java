@@ -3,8 +3,16 @@ package grp.faq.entity;
 public class GroupEntity {
     private Long gid = null;
     private String groupName = null;
-    private String desc = null;
-    private Short isDelete = 0;
+    private String gdesc = null;
+    private Short isDelete = null;
+
+    public String getGdesc() {
+        return gdesc;
+    }
+
+    public void setGdesc(String gdesc) {
+        this.gdesc = gdesc;
+    }
 
     public Long getGid() {
         return gid;
@@ -20,14 +28,6 @@ public class GroupEntity {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public Short getIsDelete() {
