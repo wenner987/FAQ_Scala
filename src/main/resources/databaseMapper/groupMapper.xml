@@ -5,7 +5,7 @@
 
 <!--    GroupEntity insertGroup(GroupEntity groupEntity);-->
     <insert id="insertGroup" parameterType="grp.faq.entity.GroupEntity" useGeneratedKeys="true" keyProperty="gid">
-        INSERT INTO TB_GROUP(C_GID,C_GROUP_NAME,C_DESC,C_IS_DELETE) VALUES (#{gid},#{groupName},#{desc},#{isDelete})
+        INSERT INTO TB_GROUP(C_GID,C_GROUP_NAME,C_DESC,C_IS_DELETE) VALUES (#{gid},#{groupName},#{gDesc},#{isDelete})
     </insert>
 <!--    List selectAll();-->
     <select id="selectAll" resultType="grp.faq.entity.GroupEntity">
@@ -19,4 +19,8 @@
     <select id="deleteByName">
         UPDATE TB_GROUP SET C_IS_DELETE=1 WHERE C_GID IN (SELECT C_GID FROM C_GROUP WHERE C_GOURP_NAME=#{name})
     </select>
+<!--    int update(@Param("name")String name, @Param("desc")String desc);-->
+    <update id="update">
+        UPDATE TB_GROUP SET C_GROUP_NAME=#{name} AND C_GROUP_DESC=#{desc}
+    </update>
 </mapper>

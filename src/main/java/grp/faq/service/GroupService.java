@@ -15,4 +15,6 @@ public interface GroupService {
     List<GroupEntity> selectAll();
 
     List<GroupEntity> selectPagination(Integer index);
+
+    void update(String name, String desc) throws Exception;
 }

@@ -25,7 +25,8 @@ public class GroupServiceImpl implements GroupService {
         }
         GroupEntity newGroup = new GroupEntity();
         newGroup.setGroupName(name);
-        newGroup.setGdesc(desc);
+        newGroup.setgDesc(desc);
+        newGroup.setIsDelete((short) 0);
         groupDAO.insertGroup(newGroup);
     }
 
@@ -49,5 +50,15 @@ public class GroupServiceImpl implements GroupService {
         List list = groupDAO.selectPagination(index);
         logger.info(list);
         return list;
+    }
+
+    public void update(String name, String desc) throws Exception {
+        logger.info("name=" + name);
+        logger.info("desc=" + desc);
+        int r = groupDAO.update(name, desc);
+        logger.info("r=" + r);
+        if(r == 0){
+            throw new Exception("Reason unknown.");
+        }
     }
 }

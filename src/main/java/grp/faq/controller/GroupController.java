@@ -85,7 +85,7 @@ public class GroupController {
         }
         if(check){
             // TODO service wenner-20191106
-            // groupService.updateGroup(name, desc);
+//             groupService.updateGroup(name, desc);
             json.put("RESULT", "SUCCESS");
         }
         logger.info(json);

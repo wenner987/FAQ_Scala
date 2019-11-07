@@ -3,15 +3,15 @@ package grp.faq.entity;
 public class GroupEntity {
     private Long gid = null;
     private String groupName = null;
-    private String gdesc = null;
+    private String gDesc = null;
     private Short isDelete = null;
 
-    public String getGdesc() {
-        return gdesc;
+    public String getgDesc() {
+        return gDesc;
     }
 
-    public void setGdesc(String gdesc) {
-        this.gdesc = gdesc;
+    public void setgDesc(String gDesc) {
+        this.gDesc = gDesc;
     }
 
     public Long getGid() {

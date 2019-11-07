@@ -1,6 +1,5 @@
 package grp.faq.paramcheck.impl;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import grp.faq.paramcheck.GroupControllerCheck;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +8,7 @@ public class GroupControllerCheckImpl implements GroupControllerCheck {
 
     public Boolean checkNameAndDesc(String name, String desc)throws Exception{
         if(name != null && desc != null){
-            if(name.length() < 25 && desc.length() < 100){
+            if(name.length() > 25 || desc.length() > 100){
                 throw new Exception("The param name length have to less than 25 and desc length less than 100.");
             }
         }else{

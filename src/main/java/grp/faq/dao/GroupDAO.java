@@ -17,4 +17,6 @@ public interface GroupDAO {
 
     List selectPagination(@Param("index") Integer index);
 
+    int update(@Param("name")String name, @Param("desc")String desc);
+
 }
