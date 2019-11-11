@@ -11,7 +11,7 @@ public class UserEntity {
     private Long score = null;
     private Date lastLogin = null;
     private String mailBox = null;
-    private Short isDelete = 0;
+    private Short isDelete = null;
 
     public Short getIsDelete() {
         return isDelete;

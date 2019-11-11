@@ -121,14 +121,13 @@ public class GroupController {
         Integer indexInteger = null;
         logger.info("index=" + index);
         try{
-            groupControllerCheck.checkIndex(index);
+            check = groupControllerCheck.checkIndex(index);
         }catch (Exception e){
             json.put("RESULT", "FAILURE");
             json.put("REASON", e.getMessage());
         }
         if(check){
-            List list = null;
-            list = groupService.selectPagination(indexInteger);
+            List list = groupService.selectPagination(indexInteger);
             json.put("RESULT", "SUCCESS");
             json.put("LENGTH", list.size());
             json.put("LAST_PAGE", list.size() < 20 ? "Y" : "N");

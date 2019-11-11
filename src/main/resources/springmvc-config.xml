@@ -26,7 +26,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <mvc:resources location="/images/" mapping="/img/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
     <mvc:resources location="/css/" mapping="/css/**"/>
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
@@ -34,8 +34,8 @@
     <!-- ViewResolver -->
     <bean id="jsplViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+        <property name="prefix" value="/faq/"/>
+		<property name="suffix" value=".html" />
     </bean>
 
     <!-- conf interceptors -->
