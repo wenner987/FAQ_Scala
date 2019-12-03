@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grp.faq.dao.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Answer" >
+    <constructor >
+      <idArg column="C_ANSID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_UID" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_QID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_ANS_TIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="C_ANS_CONTEXT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="C_IS_DELETE" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_LAST_UPDATE" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="C_IS_FOLD" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    C_ANSID, C_UID, C_QID, C_ANS_TIME, C_ANS_CONTEXT, C_IS_DELETE, C_LAST_UPDATE, C_IS_FOLD
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_ANSWER
+    where C_ANSID = #{cAnsid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TB_ANSWER
+    where C_ANSID = #{cAnsid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="grp.faq.entity.Answer" >
+    insert into TB_ANSWER (C_ANSID, C_UID, C_QID, 
+      C_ANS_TIME, C_ANS_CONTEXT, C_IS_DELETE, 
+      C_LAST_UPDATE, C_IS_FOLD)
+    values (#{cAnsid,jdbcType=BIGINT}, #{cUid,jdbcType=TINYINT}, #{cQid,jdbcType=BIGINT}, 
+      #{cAnsTime,jdbcType=DATE}, #{cAnsContext,jdbcType=VARCHAR}, #{cIsDelete,jdbcType=TINYINT}, 
+      #{cLastUpdate,jdbcType=DATE}, #{cIsFold,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="grp.faq.entity.Answer" >
+    insert into TB_ANSWER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cAnsid != null" >
+        C_ANSID,
+      </if>
+      <if test="cUid != null" >
+        C_UID,
+      </if>
+      <if test="cQid != null" >
+        C_QID,
+      </if>
+      <if test="cAnsTime != null" >
+        C_ANS_TIME,
+      </if>
+      <if test="cAnsContext != null" >
+        C_ANS_CONTEXT,
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE,
+      </if>
+      <if test="cLastUpdate != null" >
+        C_LAST_UPDATE,
+      </if>
+      <if test="cIsFold != null" >
+        C_IS_FOLD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cAnsid != null" >
+        #{cAnsid,jdbcType=BIGINT},
+      </if>
+      <if test="cUid != null" >
+        #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cQid != null" >
+        #{cQid,jdbcType=BIGINT},
+      </if>
+      <if test="cAnsTime != null" >
+        #{cAnsTime,jdbcType=DATE},
+      </if>
+      <if test="cAnsContext != null" >
+        #{cAnsContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cIsDelete != null" >
+        #{cIsDelete,jdbcType=TINYINT},
+      </if>
+      <if test="cLastUpdate != null" >
+        #{cLastUpdate,jdbcType=DATE},
+      </if>
+      <if test="cIsFold != null" >
+        #{cIsFold,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.Answer" >
+    update TB_ANSWER
+    <set >
+      <if test="cUid != null" >
+        C_UID = #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cQid != null" >
+        C_QID = #{cQid,jdbcType=BIGINT},
+      </if>
+      <if test="cAnsTime != null" >
+        C_ANS_TIME = #{cAnsTime,jdbcType=DATE},
+      </if>
+      <if test="cAnsContext != null" >
+        C_ANS_CONTEXT = #{cAnsContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
+      </if>
+      <if test="cLastUpdate != null" >
+        C_LAST_UPDATE = #{cLastUpdate,jdbcType=DATE},
+      </if>
+      <if test="cIsFold != null" >
+        C_IS_FOLD = #{cIsFold,jdbcType=TINYINT},
+      </if>
+    </set>
+    where C_ANSID = #{cAnsid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.Answer" >
+    update TB_ANSWER
+    set C_UID = #{cUid,jdbcType=TINYINT},
+      C_QID = #{cQid,jdbcType=BIGINT},
+      C_ANS_TIME = #{cAnsTime,jdbcType=DATE},
+      C_ANS_CONTEXT = #{cAnsContext,jdbcType=VARCHAR},
+      C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
+      C_LAST_UPDATE = #{cLastUpdate,jdbcType=DATE},
+      C_IS_FOLD = #{cIsFold,jdbcType=TINYINT}
+    where C_ANSID = #{cAnsid,jdbcType=BIGINT}
+  </update>
+</mapper>

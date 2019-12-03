@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grp.faq.dao.PraiseMapper" >
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Praise" >
+    <constructor >
+      <idArg column="C_PRAISEID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_UID" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_PRATYPE" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_COMMON_ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_IS_DELETE" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    C_PRAISEID, C_UID, C_PRATYPE, C_COMMON_ID, C_IS_DELETE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_PRAISE
+    where C_PRAISEID = #{cPraiseid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TB_PRAISE
+    where C_PRAISEID = #{cPraiseid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="grp.faq.entity.Praise" >
+    insert into TB_PRAISE (C_PRAISEID, C_UID, C_PRATYPE, 
+      C_COMMON_ID, C_IS_DELETE)
+    values (#{cPraiseid,jdbcType=BIGINT}, #{cUid,jdbcType=TINYINT}, #{cPratype,jdbcType=TINYINT}, 
+      #{cCommonId,jdbcType=BIGINT}, #{cIsDelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="grp.faq.entity.Praise" >
+    insert into TB_PRAISE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cPraiseid != null" >
+        C_PRAISEID,
+      </if>
+      <if test="cUid != null" >
+        C_UID,
+      </if>
+      <if test="cPratype != null" >
+        C_PRATYPE,
+      </if>
+      <if test="cCommonId != null" >
+        C_COMMON_ID,
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cPraiseid != null" >
+        #{cPraiseid,jdbcType=BIGINT},
+      </if>
+      <if test="cUid != null" >
+        #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cPratype != null" >
+        #{cPratype,jdbcType=TINYINT},
+      </if>
+      <if test="cCommonId != null" >
+        #{cCommonId,jdbcType=BIGINT},
+      </if>
+      <if test="cIsDelete != null" >
+        #{cIsDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.Praise" >
+    update TB_PRAISE
+    <set >
+      <if test="cUid != null" >
+        C_UID = #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cPratype != null" >
+        C_PRATYPE = #{cPratype,jdbcType=TINYINT},
+      </if>
+      <if test="cCommonId != null" >
+        C_COMMON_ID = #{cCommonId,jdbcType=BIGINT},
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where C_PRAISEID = #{cPraiseid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.Praise" >
+    update TB_PRAISE
+    set C_UID = #{cUid,jdbcType=TINYINT},
+      C_PRATYPE = #{cPratype,jdbcType=TINYINT},
+      C_COMMON_ID = #{cCommonId,jdbcType=BIGINT},
+      C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT}
+    where C_PRAISEID = #{cPraiseid,jdbcType=BIGINT}
+  </update>
+</mapper>

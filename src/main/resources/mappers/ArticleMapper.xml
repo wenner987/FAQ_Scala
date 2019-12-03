@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grp.faq.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Article" >
+    <constructor >
+      <idArg column="C_ARTID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_UID" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_GID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_ART_CONTEXT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="C_ART_TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="C_ART_CTIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="C_IS_DELETE" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="C_LAST_UPDATE" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="C_BROWSE_COUNT" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="C_G_X" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    C_ARTID, C_UID, C_GID, C_ART_CONTEXT, C_ART_TITLE, C_ART_CTIME, C_IS_DELETE, C_LAST_UPDATE, 
+    C_BROWSE_COUNT, C_G_X
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_ARTICLE
+    where C_ARTID = #{cArtid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TB_ARTICLE
+    where C_ARTID = #{cArtid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="grp.faq.entity.Article" >
+    insert into TB_ARTICLE (C_ARTID, C_UID, C_GID, 
+      C_ART_CONTEXT, C_ART_TITLE, C_ART_CTIME, 
+      C_IS_DELETE, C_LAST_UPDATE, C_BROWSE_COUNT, 
+      C_G_X)
+    values (#{cArtid,jdbcType=BIGINT}, #{cUid,jdbcType=TINYINT}, #{cGid,jdbcType=BIGINT}, 
+      #{cArtContext,jdbcType=VARCHAR}, #{cArtTitle,jdbcType=VARCHAR}, #{cArtCtime,jdbcType=DATE}, 
+      #{cIsDelete,jdbcType=TINYINT}, #{cLastUpdate,jdbcType=DATE}, #{cBrowseCount,jdbcType=BIGINT}, 
+      #{cGX,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="grp.faq.entity.Article" >
+    insert into TB_ARTICLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cArtid != null" >
+        C_ARTID,
+      </if>
+      <if test="cUid != null" >
+        C_UID,
+      </if>
+      <if test="cGid != null" >
+        C_GID,
+      </if>
+      <if test="cArtContext != null" >
+        C_ART_CONTEXT,
+      </if>
+      <if test="cArtTitle != null" >
+        C_ART_TITLE,
+      </if>
+      <if test="cArtCtime != null" >
+        C_ART_CTIME,
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE,
+      </if>
+      <if test="cLastUpdate != null" >
+        C_LAST_UPDATE,
+      </if>
+      <if test="cBrowseCount != null" >
+        C_BROWSE_COUNT,
+      </if>
+      <if test="cGX != null" >
+        C_G_X,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cArtid != null" >
+        #{cArtid,jdbcType=BIGINT},
+      </if>
+      <if test="cUid != null" >
+        #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cGid != null" >
+        #{cGid,jdbcType=BIGINT},
+      </if>
+      <if test="cArtContext != null" >
+        #{cArtContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cArtTitle != null" >
+        #{cArtTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cArtCtime != null" >
+        #{cArtCtime,jdbcType=DATE},
+      </if>
+      <if test="cIsDelete != null" >
+        #{cIsDelete,jdbcType=TINYINT},
+      </if>
+      <if test="cLastUpdate != null" >
+        #{cLastUpdate,jdbcType=DATE},
+      </if>
+      <if test="cBrowseCount != null" >
+        #{cBrowseCount,jdbcType=BIGINT},
+      </if>
+      <if test="cGX != null" >
+        #{cGX,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.Article" >
+    update TB_ARTICLE
+    <set >
+      <if test="cUid != null" >
+        C_UID = #{cUid,jdbcType=TINYINT},
+      </if>
+      <if test="cGid != null" >
+        C_GID = #{cGid,jdbcType=BIGINT},
+      </if>
+      <if test="cArtContext != null" >
+        C_ART_CONTEXT = #{cArtContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cArtTitle != null" >
+        C_ART_TITLE = #{cArtTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cArtCtime != null" >
+        C_ART_CTIME = #{cArtCtime,jdbcType=DATE},
+      </if>
+      <if test="cIsDelete != null" >
+        C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
+      </if>
+      <if test="cLastUpdate != null" >
+        C_LAST_UPDATE = #{cLastUpdate,jdbcType=DATE},
+      </if>
+      <if test="cBrowseCount != null" >
+        C_BROWSE_COUNT = #{cBrowseCount,jdbcType=BIGINT},
+      </if>
+      <if test="cGX != null" >
+        C_G_X = #{cGX,jdbcType=TINYINT},
+      </if>
+    </set>
+    where C_ARTID = #{cArtid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.Article" >
+    update TB_ARTICLE
+    set C_UID = #{cUid,jdbcType=TINYINT},
+      C_GID = #{cGid,jdbcType=BIGINT},
+      C_ART_CONTEXT = #{cArtContext,jdbcType=VARCHAR},
+      C_ART_TITLE = #{cArtTitle,jdbcType=VARCHAR},
+      C_ART_CTIME = #{cArtCtime,jdbcType=DATE},
+      C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
+      C_LAST_UPDATE = #{cLastUpdate,jdbcType=DATE},
+      C_BROWSE_COUNT = #{cBrowseCount,jdbcType=BIGINT},
+      C_G_X = #{cGX,jdbcType=TINYINT}
+    where C_ARTID = #{cArtid,jdbcType=BIGINT}
+  </update>
+</mapper>
