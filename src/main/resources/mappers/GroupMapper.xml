@@ -12,73 +12,21 @@
   <sql id="Base_Column_List" >
     C_GID, C_DESC, C_IS_DELETE, C_GROUP_NAME
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from TB_GROUP
-    where C_GID = #{cGid,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from TB_GROUP
-    where C_GID = #{cGid,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="grp.faq.entity.Group" >
-    insert into TB_GROUP (C_GID, C_DESC, C_IS_DELETE, 
-      C_GROUP_NAME)
-    values (#{cGid,jdbcType=BIGINT}, #{cDesc,jdbcType=VARCHAR}, #{cIsDelete,jdbcType=TINYINT}, 
-      #{cGroupName,jdbcType=VARCHAR})
+<!--  @BeanProperty var cGid: Long = 0L-->
+<!--  @BeanProperty var cDesc: String = null-->
+<!--  @BeanProperty var cIsDelete: Int = 0-->
+<!--  @BeanProperty var cGroupName: String = null-->
+<!--  def add(): Boolean-->
+  <insert id="add" parameterType="grp.faq.entity.Group">
+    insert into TB_GROUP(
+    <include refid="Base_Column_List"/>
+    )
+    values (
+    #{cGid},
+    #{cDesc},
+    0,
+    #{cGroupName}
+    )
   </insert>
-  <insert id="insertSelective" parameterType="grp.faq.entity.Group" >
-    insert into TB_GROUP
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cGid != null" >
-        C_GID,
-      </if>
-      <if test="cDesc != null" >
-        C_DESC,
-      </if>
-      <if test="cIsDelete != null" >
-        C_IS_DELETE,
-      </if>
-      <if test="cGroupName != null" >
-        C_GROUP_NAME,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cGid != null" >
-        #{cGid,jdbcType=BIGINT},
-      </if>
-      <if test="cDesc != null" >
-        #{cDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="cIsDelete != null" >
-        #{cIsDelete,jdbcType=TINYINT},
-      </if>
-      <if test="cGroupName != null" >
-        #{cGroupName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.Group" >
-    update TB_GROUP
-    <set >
-      <if test="cDesc != null" >
-        C_DESC = #{cDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="cIsDelete != null" >
-        C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
-      </if>
-      <if test="cGroupName != null" >
-        C_GROUP_NAME = #{cGroupName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where C_GID = #{cGid,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.Group" >
-    update TB_GROUP
-    set C_DESC = #{cDesc,jdbcType=VARCHAR},
-      C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
-      C_GROUP_NAME = #{cGroupName,jdbcType=VARCHAR}
-    where C_GID = #{cGid,jdbcType=BIGINT}
-  </update>
+
 </mapper>

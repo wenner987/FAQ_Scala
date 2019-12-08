@@ -33,14 +33,14 @@
             <include refid="Base_Column_List"/>
     )
     values (
-            #{user.cUid},
-            #{user.cGid},
-            #{user.cAdmin},
-            #{user.cUsername},
-            #{user.cPassword},
+            #{cUid},
+            #{cGid},
+            #{cAdmin},
+            #{cUsername},
+            #{cPassword},
             0,
-            #{user.cLastLogin},
-            #{user.cMailBox},
+            #{cLastLogin},
+            #{cMailBox},
             0
     )
   </insert>
