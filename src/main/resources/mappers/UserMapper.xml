@@ -18,134 +18,40 @@
     C_UID, C_GID, C_ADMIN, C_USERNAME, C_PASSWORD, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, 
     C_IS_DELETE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Byte" >
-    select 
-    <include refid="Base_Column_List" />
-    from TB_USER
-    where C_UID = #{cUid,jdbcType=TINYINT}
-  </select>
+<!--  @BeanProperty var cUid: Byte = 0-->
+<!--  @BeanProperty var cGid: Long = 0L-->
+<!--  @BeanProperty var cAdmin: Int = 0-->
+<!--  @BeanProperty var cUsername: String = null-->
+<!--  @BeanProperty var cPassword: String = null-->
+<!--  @BeanProperty var cScore: Long = 0L-->
+<!--  @BeanProperty var cLastLogin: Date = null-->
+<!--  @BeanProperty var cMailBox: String = null-->
+<!--  @BeanProperty var cIsDelete: Int = 0-->
+<!--  def insert(user: User): Unit-->
+  <insert id="insert" parameterType="grp.faq.entity.User">
+    insert into TB_USER(
+            <include refid="Base_Column_List"/>
+    )
+    values (
+            #{user.cUid},
+            #{user.cGid},
+            #{user.cAdmin},
+            #{user.cUsername},
+            #{user.cPassword},
+            0,
+            #{user.cLastLogin},
+            #{user.cMailBox},
+            0
+    )
+  </insert>
+
+<!--  def login(@Param("username")username: String, @Param("password")password: String): User-->
   <select id="login" resultType="grp.faq.entity.User">
-    select 
-    <include refid="Base_Column_List"/>
-    from TB_USER
-    where C_USERNAME=#{username} and
-          C_PASSWORD=#{password}
+    select C_UID, C_GID, C_ADMIN, C_SCORE from TB_USER where C_USERNAME=#{username} and C_PASSWORD=#{password}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte" >
-    delete from TB_USER
-    where C_UID = #{cUid,jdbcType=TINYINT}
-  </delete>
-  <insert id="insert" parameterType="grp.faq.entity.User" >
-    insert into TB_USER (C_UID, C_GID, C_ADMIN, 
-      C_USERNAME, C_PASSWORD, C_SCORE, 
-      C_LAST_LOGIN, C_MAIL_BOX, C_IS_DELETE
-      )
-    values (#{cUid,jdbcType=TINYINT}, #{cGid,jdbcType=BIGINT}, #{cAdmin,jdbcType=TINYINT}, 
-      #{cUsername,jdbcType=VARCHAR}, #{cPassword,jdbcType=VARCHAR}, #{cScore,jdbcType=BIGINT}, 
-      #{cLastLogin,jdbcType=DATE}, #{cMailBox,jdbcType=VARCHAR}, #{cIsDelete,jdbcType=TINYINT}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="grp.faq.entity.User" >
-    insert into TB_USER
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cUid != null" >
-        C_UID,
-      </if>
-      <if test="cGid != null" >
-        C_GID,
-      </if>
-      <if test="cAdmin != null" >
-        C_ADMIN,
-      </if>
-      <if test="cUsername != null" >
-        C_USERNAME,
-      </if>
-      <if test="cPassword != null" >
-        C_PASSWORD,
-      </if>
-      <if test="cScore != null" >
-        C_SCORE,
-      </if>
-      <if test="cLastLogin != null" >
-        C_LAST_LOGIN,
-      </if>
-      <if test="cMailBox != null" >
-        C_MAIL_BOX,
-      </if>
-      <if test="cIsDelete != null" >
-        C_IS_DELETE,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cUid != null" >
-        #{cUid,jdbcType=TINYINT},
-      </if>
-      <if test="cGid != null" >
-        #{cGid,jdbcType=BIGINT},
-      </if>
-      <if test="cAdmin != null" >
-        #{cAdmin,jdbcType=TINYINT},
-      </if>
-      <if test="cUsername != null" >
-        #{cUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="cPassword != null" >
-        #{cPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="cScore != null" >
-        #{cScore,jdbcType=BIGINT},
-      </if>
-      <if test="cLastLogin != null" >
-        #{cLastLogin,jdbcType=DATE},
-      </if>
-      <if test="cMailBox != null" >
-        #{cMailBox,jdbcType=VARCHAR},
-      </if>
-      <if test="cIsDelete != null" >
-        #{cIsDelete,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.User" >
-    update TB_USER
-    <set >
-      <if test="cGid != null" >
-        C_GID = #{cGid,jdbcType=BIGINT},
-      </if>
-      <if test="cAdmin != null" >
-        C_ADMIN = #{cAdmin,jdbcType=TINYINT},
-      </if>
-      <if test="cUsername != null" >
-        C_USERNAME = #{cUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="cPassword != null" >
-        C_PASSWORD = #{cPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="cScore != null" >
-        C_SCORE = #{cScore,jdbcType=BIGINT},
-      </if>
-      <if test="cLastLogin != null" >
-        C_LAST_LOGIN = #{cLastLogin,jdbcType=DATE},
-      </if>
-      <if test="cMailBox != null" >
-        C_MAIL_BOX = #{cMailBox,jdbcType=VARCHAR},
-      </if>
-      <if test="cIsDelete != null" >
-        C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT},
-      </if>
-    </set>
-    where C_UID = #{cUid,jdbcType=TINYINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.User" >
-    update TB_USER
-    set C_GID = #{cGid,jdbcType=BIGINT},
-      C_ADMIN = #{cAdmin,jdbcType=TINYINT},
-      C_USERNAME = #{cUsername,jdbcType=VARCHAR},
-      C_PASSWORD = #{cPassword,jdbcType=VARCHAR},
-      C_SCORE = #{cScore,jdbcType=BIGINT},
-      C_LAST_LOGIN = #{cLastLogin,jdbcType=DATE},
-      C_MAIL_BOX = #{cMailBox,jdbcType=VARCHAR},
-      C_IS_DELETE = #{cIsDelete,jdbcType=TINYINT}
-    where C_UID = #{cUid,jdbcType=TINYINT}
+
+<!--  def delete(@Param("user")user: User)-->
+  <update id="delete" parameterType="grp.faq.entity.User">
+    update TB_USER set C_IS_DELETE=0 where C_UID=#{cUid}
   </update>
 </mapper>

@@ -5,7 +5,7 @@ import java.util.Date
 import scala.beans.BeanProperty
 
 class User() {
-  @BeanProperty var cUid: Int = 0
+  @BeanProperty var cUid: Byte = 0
   @BeanProperty var cGid: Long = 0L
   @BeanProperty var cAdmin: Int = 0
   @BeanProperty var cUsername: String = null
