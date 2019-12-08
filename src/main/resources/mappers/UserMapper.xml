@@ -24,6 +24,13 @@
     from TB_USER
     where C_UID = #{cUid,jdbcType=TINYINT}
   </select>
+  <select id="login" resultType="grp.faq.entity.User">
+    select 
+    <include refid="Base_Column_List"/>
+    from TB_USER
+    where C_USERNAME=#{username} and
+          C_PASSWORD=#{password}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte" >
     delete from TB_USER
     where C_UID = #{cUid,jdbcType=TINYINT}

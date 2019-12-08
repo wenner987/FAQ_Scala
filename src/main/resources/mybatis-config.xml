@@ -5,9 +5,17 @@
 	<settings>
 		<!-- 打印查询语句 -->
 		<setting name="logImpl" value="STDOUT_LOGGING" />
+
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+
 	</settings>
 
 	<mappers>
-		<mapper resource="databaseMapper/groupMapper.xml"></mapper>
+		<mapper resource="mappers/ArticleMapper.xml"/>
+		<mapper resource="mappers/AnswerMapper.xml"/>
+		<mapper resource="mappers/GroupMapper.xml"/>
+		<mapper resource="mappers/PraiseMapper.xml"/>
+		<mapper resource="mappers/QuestionMapper.xml"/>
+		<mapper resource="mappers/UserMapper.xml"/>
 	</mappers>
 </configuration>

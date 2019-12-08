@@ -32,10 +32,9 @@
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
 
     <!-- ViewResolver -->
-    <bean id="jsplViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/faq/"/>
-		<property name="suffix" value=".html" />
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp" />
     </bean>
 
     <!-- conf interceptors -->
