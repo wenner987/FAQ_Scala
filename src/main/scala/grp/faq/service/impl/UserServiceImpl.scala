@@ -118,4 +118,14 @@ class UserServiceImpl() extends UserService with LogHelper {
       }
     }
   }
+
+  override def findUserByName(username: String): User = {
+    try{
+      userDao.findUserByName(username)
+    }
+    catch {
+      case e: Exception =>
+        null
+    }
+  }
 }

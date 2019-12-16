@@ -16,7 +16,7 @@ class AnswerServiceImpl extends AnswerService{
     answerDao.getTodayAnswer()
   }
 
-  override def getAnswer(qid: Int): Map[Object,Object] = {
+  override def getAnswer(qid: Int): List[Map[Object,Object]]= {
     answerDao.getAnswer(qid)
   }
 

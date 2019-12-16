@@ -1,6 +1,7 @@
 package grp.faq.service.impl
 
-import java.util
+import java.util.Map
+import java.util.List
 
 import grp.faq.dao.QuestionMapper
 import grp.faq.entity.Question
@@ -16,8 +17,8 @@ class QuestionServiceImpl extends QuestionService{
     questionDao.getTodayQuestion()
   }
 
-  override def getQuestionRank(index: Int): util.List[Question] = {
-    var questions: util.List[Question] = null
+  override def getQuestionRank(index: Int): List[Question] = {
+    var questions: List[Question] = null
     try{
       questions = questionDao.getQuestionRank(index * 10)
       questions
@@ -39,7 +40,7 @@ class QuestionServiceImpl extends QuestionService{
     }
   }
 
-  override def getQuestion(question: Question): Question = {
+  override def getQuestion(question: Question): Map[Object,Object] = {
     try{
       questionDao.getQuestion(question)
     }

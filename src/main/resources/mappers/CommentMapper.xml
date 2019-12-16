@@ -23,4 +23,15 @@
            #{cComid}, #{cUid}, #{cContext}, NOW(), 0, #{cComType}, #{cCommonId}
           )
   </insert>
+<!--  def getComment(commentType: Int, commentId: Int): util.List[util.Map[Object, Object]]-->
+  <select id="getComment" resultType="java.util.Map">
+    select * from 
+        <if test="commentType==1">faq.TB_ARTICLE</if>
+        <if test="commentType==2">faq.TB_ANSWER</if>
+    where
+      <if test="commentType==1">C_ARTID</if>
+      <if test="commentType==2">C_ANSID</if>
+        =#{commentId}
+        and C_IS_DELETE=0
+  </select>
 </mapper>

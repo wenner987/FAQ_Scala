@@ -5,6 +5,8 @@ import java.util
 import grp.faq.entity.User
 
 trait UserService {
+  def findUserByName(username: String): User
+
   def autoLogin(username: String, password: String): User
 
   def findUseranme(username: String): Boolean

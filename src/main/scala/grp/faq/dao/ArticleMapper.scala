@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param
 import java.util.List
 
 trait ArticleMapper {
+  def add(article: Article): Int
+
   def getTodayAritcle(): Long
 
   def delete(cArtid: lang.Long): Boolean

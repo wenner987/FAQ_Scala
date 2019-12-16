@@ -15,7 +15,7 @@ class ArticleController {
   @Autowired
   val articleService: ArticleService = null
 
-  @RequestMapping(value = Array("/get_all"), method = Array(RequestMethod.POST))
+  @RequestMapping(value = Array("/getAll"), method = Array(RequestMethod.POST))
   @ResponseBody
   def getAllArticles: String = {
     val json = new JSONObject()
@@ -31,6 +31,7 @@ class ArticleController {
   }
 
   @RequestMapping(value = Array("/update"), method = Array(RequestMethod.POST))
+  @ResponseBody
   def updateArticle(article: Article): String = {
     val json: JSONObject = new JSONObject()
     json.put("ERROR", if(articleService.changeArticle(article)) 0 else 1)
@@ -42,15 +43,22 @@ class ArticleController {
   @ResponseBody
   def deleteArticle(article: Article): String = {
     val json: JSONObject = new JSONObject()
-    articleService.delete(article)
+    json.put("ERROR", if(articleService.delete(article)) 0 else 1)
     json.toJSONString
   }
-  @RequestMapping(value = Array("/getTodayAnswer"), method = Array(RequestMethod.POST))
+  @RequestMapping(value = Array("/getTodayArticle"), method = Array(RequestMethod.POST))
   @ResponseBody
   def getTodayAnswer(): String ={
     val json = new JSONObject()
     json.put("COUNT", articleService.getTodayArticle())
     json.put("ERROR", 0)
+    json.toJSONString
+  }
+  @RequestMapping(value = Array("/add"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def addArticle(article: Article): String = {
+    val json: JSONObject = new JSONObject()
+    json.put("ERROR", if(articleService.add(article)) 0 else 1)
     json.toJSONString
   }
 }

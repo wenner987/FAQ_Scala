@@ -39,14 +39,12 @@
   <update id="updateArticle" parameterType="grp.faq.entity.Article">
     update faq.TB_ARTICLE
     set
-        C_LAST_UPDATE=#{cLastUpdate},
+        C_LAST_UPDATE=NOW(),
         C_ART_CONTEXT=#{cArtContext},
         C_ART_TITLE=#{cArtTitle},
-        C_ART_CTIME=#{cArtCtime},
-        C_LAST_UPDATE=NOW(),
-        C_G_X=#{cGX}
+        C_G_X=0
     where
-        C_ART_ID
+        C_ARTID=${cArtid}
   </update>
 <!--  def getAllArticle(): List[Article]-->
   <select id="getAllArticle" resultType="grp.faq.entity.Article">
@@ -55,4 +53,12 @@
     from
         faq.TB_ARTICLE
   </select>
+<!--    def add(article: Article): Int-->
+    <insert id="add" parameterType="grp.faq.entity.Article">
+        insert into
+            faq.TB_ARTICLE(C_ARTID, C_UID, C_GID, C_ART_CONTEXT, C_ART_TITLE, C_ART_CTIME, C_IS_DELETE, C_LAST_UPDATE, C_BROWSE_COUNT, C_G_X)
+        values (
+                #{cArtid}, #{cUid}, #{cGid}, #{cArtContext}, #{cArtTitle}, NOW(), 0, NOW(), 0, 0
+               )
+    </insert>
 </mapper>

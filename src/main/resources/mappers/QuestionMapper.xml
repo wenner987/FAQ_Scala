@@ -44,8 +44,21 @@
         values(#{cQid}, #{cUid}, #{cQTitle}, 0, NOW(), #{cQContext}, 0, 0)
     </insert>
 <!--    def getQuestion(question: Question): Question-->
-    <select id="getQuestion" resultType="grp.faq.entity.Question">
-        select * from faq.TB_QUESTION where C_QID=#{cQid}
+    <select id="getQuestion" resultType="java.util.Map">
+        select
+            C_Q_TITLE, C_CREATE_TIME, C_HOT, C_Q_CONTEXT, TB_USER.C_USERNAME, COUNT(TB_ANSWER.C_ANSID) as C_COUNT
+        from
+             faq.TB_QUESTION
+        left join
+            faq.TB_USER
+        on
+            TB_QUESTION.C_UID = TB_USER.C_UID
+        left join
+            faq.TB_ANSWER
+        on
+            TB_QUESTION.C_QID = TB_ANSWER.C_QID
+        where
+              TB_QUESTION.C_QID=#{cQid}
     </select>
 
 </mapper>

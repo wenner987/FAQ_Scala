@@ -102,4 +102,20 @@ class UserController() extends LogHelper{
     }
     json.toJSONString
   }
+
+  @ResponseBody
+  @RequestMapping(value = Array("/finduserbyname"), method = Array(RequestMethod.POST))
+  def findUserByName(username:String) : String ={
+    val json = new JSONObject()
+
+    val user = userService.findUserByName(username);
+    if(user != null){
+      json.put("ERROR", 0)
+      json.put("USER", user)
+    }
+    else{
+      json.put("ERROR", 1)
+    }
+    json.toJSONString
+  }
 }

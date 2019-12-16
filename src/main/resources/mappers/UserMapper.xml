@@ -66,4 +66,8 @@
   <select id="findUsername" resultType="grp.faq.entity.User">
     select * from faq.TB_USER where C_USERNAME=#{username}
   </select>
+<!--  def findUserByName(username: String): User-->
+  <select id="findUserByName" resultType="grp.faq.entity.User">
+    select * from faq.TB_USER where C_USERNAME = #{username}
+  </select>
 </mapper>

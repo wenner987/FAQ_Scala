@@ -12,7 +12,7 @@ trait AnswerMapper {
 
   def addAnswer(answer: Answer): Int
 
-  def getAnswer(@Param("qid")qid: Int): Map[Object,Object]
+  def getAnswer(@Param("qid")qid: Int): List[Map[Object,Object]]
 
   def getTodayAnswer(): Long
 }

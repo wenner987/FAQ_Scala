@@ -14,18 +14,49 @@ class ArticleServiceImpl extends ArticleService{
   val articleDao: ArticleMapper = null
 
   override def getAllArticle: List[Article] = {
-    articleDao.getAllArticle()
+    try{
+      articleDao.getAllArticle()
+    }
+    catch {
+      case e: Exception =>
+        null
+    }
   }
 
   override def changeArticle(article: Article): Boolean = {
-    articleDao.updateArticle(article)
+    try{
+      articleDao.updateArticle(article)
+      true
+    }
+    catch {
+      case e: Exception =>
+        false
+    }
   }
 
   override def delete(article: Article): Boolean = {
-    articleDao.delete(article.cArtid)
+    try{
+      articleDao.delete(article.cArtid)
+      true
+    }
+    catch {
+      case e: Exception =>
+        false
+    }
   }
 
   override def getTodayArticle(): Long = {
     articleDao.getTodayAritcle()
+  }
+
+  override def add(article: Article): Boolean = {
+    try{
+      articleDao.add(article)
+      true
+    }
+    catch {
+      case e: Exception =>
+        false
+    }
   }
 }

@@ -26,7 +26,8 @@
   <select id="getAnswer" resultType="java.util.Map">
     select
         C_ANSID, TB_ANSWER.C_UID, C_QID, C_ANS_TIME, C_ANS_CONTEXT, C_LAST_UPDATE, TB_USER.C_USERNAME
-    from faq.TB_ANSWER
+    from
+         faq.TB_ANSWER
     left join
         TB_USER
     on

@@ -1,5 +1,7 @@
 package grp.faq.service.impl
 
+import java.util
+
 import grp.faq.dao.CommentMapper
 import grp.faq.entity.Comment
 import grp.faq.service.CommentService
@@ -18,6 +20,16 @@ class CommentServiceImpl extends CommentService{
     catch {
       case e: Exception =>
         false
+    }
+  }
+
+  override def getComment(commentType: Int, commentId: Int): util.List[util.Map[Object, Object]] = {
+    try{
+      commentDao.getComment(commentType, commentId)
+    }
+    catch {
+      case e: Exception =>
+        null
     }
   }
 }
