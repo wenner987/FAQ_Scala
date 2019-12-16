@@ -7,6 +7,8 @@ import grp.faq.entity.User
 import org.apache.ibatis.annotations.Param
 
 trait UserMapper {
+  def findUsername(@Param("username")username: String): User
+
   def getUserRank(): util.List[User]
 
   def updateLastLogin(@Param("date") date: Date, @Param("C_UID") cUid: Byte): Unit
@@ -18,5 +20,6 @@ trait UserMapper {
   def delete(@Param("user")user: User)
 
   def getAllUsers(): util.List[User]
+
 
 }

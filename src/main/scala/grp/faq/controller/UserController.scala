@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSONObject
 import grp.faq.entity.User
 import grp.faq.service.UserService
 import grp.faq.utils.LogHelper
-import javax.servlet.http.{Cookie, HttpServletResponse}
+import javax.servlet.http.{Cookie, HttpServletRequest, HttpServletResponse}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, ResponseBody}
 import java.util.List
+
+import gqp.faq.utils.MD5Utils
+import org.springframework.transaction.annotation.Transactional
 
 @Controller
 @RequestMapping(value = Array("/user"))
@@ -19,9 +22,15 @@ class UserController() extends LogHelper{
 
   @RequestMapping(value = Array("/login"), method = Array(RequestMethod.POST))
   @ResponseBody
-  private[controller] def login(username: String, password: String, response: HttpServletResponse) = {
+  private[controller] def login(username: String, password: String, autoLogin: Int, request: HttpServletRequest, response: HttpServletResponse) = {
     val json: JSONObject = new JSONObject
-    val user: User = userService.login(username, password)
+    var user: User = null
+    if(autoLogin == 0){
+      user = userService.login(username, password)
+    }
+    else{
+      user = userService.autoLogin(username, password)
+    }
     logger.info("username" + username)
     logger.info("password" + password)
     if(user == null)
@@ -30,8 +39,12 @@ class UserController() extends LogHelper{
       json.put("ERROR", new Integer(0))
       json.put("USER_INFO", user)
 
+      if(user.cAdmin == 1){
+        request.getSession().setAttribute("admin", 1)
+      }
+
       val username_cookie: Cookie = new Cookie("username", username)
-      val password_cookie: Cookie = new Cookie("password", password)
+      val password_cookie: Cookie = new Cookie("password", MD5Utils.getMd5(password))
       response.addCookie(password_cookie)
       response.addCookie(username_cookie)
     }
@@ -40,9 +53,15 @@ class UserController() extends LogHelper{
 
   @RequestMapping(value = Array("/register"), method = Array(RequestMethod.POST))
   @ResponseBody
+  @Transactional
   private[controller] def register(user: User) = {
     val json = new JSONObject
-    json.put("ERROR", if(userService.register(user)) 0 else 1)
+    if(!userService.findUseranme(user.cUsername)){
+      json.put("ERROR", 2)
+    }
+    else {
+      json.put("ERROR", if(userService.register(user)) 0 else 1)
+    }
     json.toJSONString
   }
 

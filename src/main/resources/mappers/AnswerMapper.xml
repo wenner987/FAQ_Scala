@@ -22,4 +22,33 @@
     from faq.TB_ANSWER
     where TO_DAYS(C_LAST_UPDATE) = TO_DAYS(NOW())
   </select>
+<!--  def getAnswer(): Answer-->
+  <select id="getAnswer" resultType="java.util.Map">
+    select
+        C_ANSID, TB_ANSWER.C_UID, C_QID, C_ANS_TIME, C_ANS_CONTEXT, C_LAST_UPDATE, TB_USER.C_USERNAME
+    from faq.TB_ANSWER
+    left join
+        TB_USER
+    on
+        TB_USER.C_UID=TB_ANSWER.C_UID
+    where TB_ANSWER.C_QID=#{qid} and TB_ANSWER.C_IS_DELETE=0 and TB_ANSWER.C_IS_FOLD=0
+  </select>
+<!--  def addAnswer(answer: Answer): Int-->
+  <insert id="addAnswer" parameterType="grp.faq.entity.Answer">
+    insert into
+        faq.TB_ANSWER(C_ANSID, C_UID, C_QID, C_ANS_TIME, C_ANS_CONTEXT, C_IS_DELETE, C_LAST_UPDATE, C_IS_FOLD)
+    values(#{cAnsid}, #{cUid}, #{cQid}, NOW(), #{cAnsContext}, 0, NOW(), 0)
+  </insert>
+<!--  def delete(ansid: Int): Int-->
+  <update id="delete">
+    update faq.TB_ANSWER
+    set C_IS_DELETE=1
+    where C_ANSID=#{ansid}
+  </update>
+<!--  def update(answer: Answer): Int-->
+  <update id="update" parameterType="grp.faq.entity.Answer">
+    update faq.TB_ANSWER
+    set C_ANS_CONTEXT=#{cAnsContext}
+    where C_ANSID=#{cAnsid}
+  </update>
 </mapper>

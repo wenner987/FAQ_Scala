@@ -17,6 +17,21 @@ class MessageController {
   def getMessage(uid: Int): String ={
     val json = new JSONObject()
     val message = messageService.getMessage(uid)
+    if(message != null){
+      json.put("MESSAGES", message)
+      json.put("ERROR", 0)
+    }
+    else{
+      json.put("ERROR", 1)
+    }
+    json.toJSONString
+  }
+
+  @RequestMapping(value = Array("/readed"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def readed(messageId: Int): String = {
+    val json = new JSONObject()
+    json.put("ERROR", if(messageService.readed(messageId)) 0 else 1)
     json.toJSONString
   }
 }

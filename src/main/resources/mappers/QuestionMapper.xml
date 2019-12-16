@@ -37,5 +37,15 @@
     where
       TO_DAYS(C_CREATE_TIME) = TO_DAYS(NOW())
   </select>
+<!--    def addQuestion(question: Question): Int-->
+    <insert id="addQuestion" parameterType="grp.faq.entity.Question">
+        insert into
+            faq.TB_QUESTION(C_QID, C_UID, C_Q_TITLE, C_CLOSE, C_CREATE_TIME, C_Q_CONTEXT, C_G_X, C_HOT)
+        values(#{cQid}, #{cUid}, #{cQTitle}, 0, NOW(), #{cQContext}, 0, 0)
+    </insert>
+<!--    def getQuestion(question: Question): Question-->
+    <select id="getQuestion" resultType="grp.faq.entity.Question">
+        select * from faq.TB_QUESTION where C_QID=#{cQid}
+    </select>
 
 </mapper>

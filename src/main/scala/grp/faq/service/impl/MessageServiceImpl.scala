@@ -24,4 +24,15 @@ class MessageServiceImpl extends MessageService{
         null
     }
   }
+
+  override def readed(messageId: Int): Boolean = {
+    try{
+      messageDao.readed(messageId)
+      true
+    }
+    catch {
+      case exception: Exception =>
+        false
+    }
+  }
 }

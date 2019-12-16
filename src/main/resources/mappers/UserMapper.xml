@@ -39,7 +39,7 @@
 <!--  def login(@Param("username")username: String, @Param("password")password: String): User-->
   <select id="login" resultType="grp.faq.entity.User">
     select
-        *
+        C_GID, C_UID, C_USERNAME, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, C_ADMIN
     from
         faq.TB_USER
     where
@@ -61,5 +61,9 @@
         C_ADMIN, C_USERNAME, C_GID, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, C_IS_DELETE
     from
         faq.TB_USER
+  </select>
+<!--  def findUsername(): Boolean-->
+  <select id="findUsername" resultType="grp.faq.entity.User">
+    select * from faq.TB_USER where C_USERNAME=#{username}
   </select>
 </mapper>

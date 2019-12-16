@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.List
 
+import org.springframework.transaction.annotation.Transactional
+
 @Service
 class UserServiceImpl() extends UserService with LogHelper {
 
@@ -34,7 +36,6 @@ class UserServiceImpl() extends UserService with LogHelper {
       }
     }
   }
-
   override def register(user: User): Boolean = {
     if(user.cAdmin == null) {
       user.cAdmin = 1.asInstanceOf[Byte]
@@ -79,6 +80,8 @@ class UserServiceImpl() extends UserService with LogHelper {
     users
   }
 
+
+
   override def getUserRank(): util.List[User] = {
     var users: util.List[User] = null
     try{
@@ -87,6 +90,32 @@ class UserServiceImpl() extends UserService with LogHelper {
     }catch {
       case e: Exception =>
         null
+    }
+  }
+
+  override def findUseranme(username: String): Boolean = {
+    if(userDao.findUsername(username) != null){
+      false
+    }
+    else{
+      true
+    }
+  }
+
+  override def autoLogin(username: String, password: String): User = {
+    try{
+      val user = userDao.login(username, password)
+      if (user != null){
+        userDao.updateLastLogin(new Date(), user.cUid)
+      }
+      user
+    }
+    catch {
+      case e: Exception => {
+        logger.error(e.toString)
+        e.printStackTrace()
+        null
+      }
     }
   }
 }

@@ -13,6 +13,7 @@
 	<mappers>
 		<mapper resource="mappers/ArticleMapper.xml"/>
 		<mapper resource="mappers/AnswerMapper.xml"/>
+		<mapper resource="mappers/CommentMapper.xml"/>
 		<mapper resource="mappers/GroupMapper.xml"/>
 		<mapper resource="mappers/MessageMapper.xml"/>
 		<mapper resource="mappers/MessageAndUserMapper.xml"/>

@@ -27,4 +27,25 @@ class QuestionServiceImpl extends QuestionService{
         null
     }
   }
+
+  override def addQuestion(question: Question): Boolean = {
+    try{
+      questionDao.addQuestion(question)
+      true
+    }
+    catch {
+      case exception: Exception =>
+        false
+    }
+  }
+
+  override def getQuestion(question: Question): Question = {
+    try{
+      questionDao.getQuestion(question)
+    }
+    catch {
+      case exception: Exception =>
+        null
+    }
+  }
 }

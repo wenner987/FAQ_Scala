@@ -27,4 +27,10 @@
     where
         C_READED=0 and TB_MESSAGE_USER.C_USER_ID=#{uid}
   </select>
+<!--    def readed(messageId: Int): Int-->
+    <update id="readed">
+        update faq.TB_MESSAGE
+        set C_READED=1
+        where C_MESSAGE_ID=#{messageId}
+    </update>
 </mapper>

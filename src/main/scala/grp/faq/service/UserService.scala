@@ -5,6 +5,10 @@ import java.util
 import grp.faq.entity.User
 
 trait UserService {
+  def autoLogin(username: String, password: String): User
+
+  def findUseranme(username: String): Boolean
+
   def getUserRank(): util.List[User]
 
   def getAllUsers(): util.List[User]
