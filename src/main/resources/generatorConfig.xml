@@ -22,9 +22,9 @@
         <!--jdbc的数据库连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://172.24.5.30:3306/faq"
-                userId="faq"
-                password="kf&amp;Zv0M4Tp0J8guRD$">
+                connectionURL="jdbc:mysql://39.97.182.151:3306/faq"
+                userId="root"
+                password="FLsOrNAFc$esqZZR#xl4nDperFp2t7fEUZcg#^qif#XT094PNK">
         </jdbcConnection>
 
 
@@ -38,7 +38,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="grp.faq.entity" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="grp.faq.entity" targetProject="./src/main/scala">
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
             <!-- 是否对model添加 构造函数 -->
@@ -61,8 +61,8 @@
         -->
 
         <!-- targetPackage：mapper接口dao生成的位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="grp.faq.dao" targetProject="./src/main/java">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="grp.faq.dao" targetProject="./src/main/scala">
+<!--             enableSubPackages:是否让schema作为包的后缀-->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
@@ -73,6 +73,10 @@
         <table tableName="TB_GROUP" domainObjectName="Group" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="TB_PRAISE" domainObjectName="Praise" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="TB_QUESTION" domainObjectName="Question" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="TB_MESSAGE" domainObjectName="Message" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="TB_MESSAGE_USER" domainObjectName="MessageAndUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="TB_TAG" domainObjectName="Tag" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="TB_TAG_AND_ARTICLE" domainObjectName="TagAndArticle" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 <!--        <table tableName="mumall_product" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
 <!--            <columnOverride column="detail" jdbcType="VARCHAR" />-->
 <!--            <columnOverride column="sub_images" jdbcType="VARCHAR" />-->

@@ -1,32 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="grp.faq.dao.GroupMapper" >
-  <resultMap id="BaseResultMap" type="grp.faq.entity.Group" >
-    <constructor >
-      <idArg column="C_GID" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="C_DESC" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_IS_DELETE" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="C_GROUP_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="grp.faq.dao.GroupMapper">
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Group">
+    <constructor>
+      <idArg column="C_GID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="C_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_IS_DELETE" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_ADD_ALLOW" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    C_GID, C_DESC, C_IS_DELETE, C_GROUP_NAME
+  <sql id="Base_Column_List">
+    C_GID, C_DESC, C_IS_DELETE, C_GROUP_NAME, C_ADD_ALLOW
   </sql>
-<!--  @BeanProperty var cGid: Long = 0L-->
-<!--  @BeanProperty var cDesc: String = null-->
-<!--  @BeanProperty var cIsDelete: Int = 0-->
-<!--  @BeanProperty var cGroupName: String = null-->
+<!--  def getAllGroup(): List[Group]-->
+  <select id="getAllGroup" resultType="grp.faq.entity.Group">
+    select
+        C_GID, C_DESC, C_GROUP_NAME
+    from
+        faq.TB_GROUP
+    where
+        C_IS_DELETE=0 and C_ADD_ALLOW=1
+  </select>
 <!--  def add(): Boolean-->
   <insert id="add" parameterType="grp.faq.entity.Group">
-    insert into TB_GROUP(
-    <include refid="Base_Column_List"/>
-    )
-    values (
-    #{cGid},
-    #{cDesc},
-    0,
-    #{cGroupName}
-    )
+    insert into faq.TB_GROUP(C_DESC, C_IS_DELETE, C_GROUP_NAME, C_ADD_ALLOW)
+    VALUES (#{cDesc}, 0, #{cGroupName}, 0)
   </insert>
-
 </mapper>

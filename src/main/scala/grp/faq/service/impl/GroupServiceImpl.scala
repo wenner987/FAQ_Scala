@@ -6,6 +6,7 @@ import grp.faq.service.GroupService
 import grp.faq.utils.LogHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.List
 
 @Service
 class GroupServiceImpl extends GroupService with LogHelper {
@@ -14,7 +15,7 @@ class GroupServiceImpl extends GroupService with LogHelper {
 
   override def add(group: Group): Boolean = {
     try{
-      groupDao.add()
+      groupDao.add(group)
     }
     catch {
       case e: Exception => {
@@ -23,4 +24,9 @@ class GroupServiceImpl extends GroupService with LogHelper {
       }
     }
   }
+
+  override def getAllGroups(): List[Group] = {
+    groupDao.getAllGroup()
+  }
+
 }

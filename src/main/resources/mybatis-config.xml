@@ -14,8 +14,16 @@
 		<mapper resource="mappers/ArticleMapper.xml"/>
 		<mapper resource="mappers/AnswerMapper.xml"/>
 		<mapper resource="mappers/GroupMapper.xml"/>
+		<mapper resource="mappers/MessageMapper.xml"/>
+		<mapper resource="mappers/MessageAndUserMapper.xml"/>
 		<mapper resource="mappers/PraiseMapper.xml"/>
 		<mapper resource="mappers/QuestionMapper.xml"/>
+		<mapper resource="mappers/TagAndArticleMapper.xml"/>
+		<mapper resource="mappers/TagMapper.xml"/>
 		<mapper resource="mappers/UserMapper.xml"/>
 	</mappers>
+	
+<!--	<typeAliases>-->
+<!--		<package name="mappers"/>-->
+<!--	</typeAliases>-->
 </configuration>

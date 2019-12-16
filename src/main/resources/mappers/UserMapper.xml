@@ -1,57 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="grp.faq.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="grp.faq.entity.User" >
-    <constructor >
-      <idArg column="C_UID" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="C_GID" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="C_ADMIN" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="C_USERNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_PASSWORD" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_SCORE" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="C_LAST_LOGIN" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="C_MAIL_BOX" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_IS_DELETE" jdbcType="TINYINT" javaType="java.lang.Byte" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="grp.faq.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="grp.faq.entity.User">
+    <constructor>
+      <idArg column="C_UID" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_GID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="C_ADMIN" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_SCORE" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="C_LAST_LOGIN" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="C_MAIL_BOX" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_IS_DELETE" javaType="java.lang.Byte" jdbcType="TINYINT" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    C_UID, C_GID, C_ADMIN, C_USERNAME, C_PASSWORD, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, 
-    C_IS_DELETE
-  </sql>
-<!--  @BeanProperty var cUid: Byte = 0-->
-<!--  @BeanProperty var cGid: Long = 0L-->
-<!--  @BeanProperty var cAdmin: Int = 0-->
-<!--  @BeanProperty var cUsername: String = null-->
-<!--  @BeanProperty var cPassword: String = null-->
-<!--  @BeanProperty var cScore: Long = 0L-->
-<!--  @BeanProperty var cLastLogin: Date = null-->
-<!--  @BeanProperty var cMailBox: String = null-->
-<!--  @BeanProperty var cIsDelete: Int = 0-->
+<!--  def getUserRank(): util.List[User]-->
+  <select id="getUserRank" resultType="grp.faq.entity.User">
+    select
+        C_SCORE, C_USERNAME
+    from
+        faq.TB_USER
+    order by
+        C_SCORE
+    desc
+    limit 10
+  </select>
+<!--  def updateLastLogin(@Param("date") date: Date, @Param("C_UID") cUid: Byte): Unit-->
+  <update id="updateLastLogin">
+    update faq.TB_USER
+    set C_LAST_LOGIN=#{date}
+    where C_UID=#{C_UID}
+  </update>
 <!--  def insert(user: User): Unit-->
   <insert id="insert" parameterType="grp.faq.entity.User">
-    insert into TB_USER(
-            <include refid="Base_Column_List"/>
-    )
-    values (
-            #{cUid},
-            #{cGid},
-            #{cAdmin},
-            #{cUsername},
-            #{cPassword},
-            0,
-            #{cLastLogin},
-            #{cMailBox},
-            0
-    )
+    insert into faq.TB_USER(C_GID, C_ADMIN, C_USERNAME, C_PASSWORD, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, C_IS_DELETE)
+    values(#{cGid}, #{cAdmin}, #{cUsername}, #{cPassword}, 0, null, #{cMailBox}, 0)
   </insert>
-
 <!--  def login(@Param("username")username: String, @Param("password")password: String): User-->
   <select id="login" resultType="grp.faq.entity.User">
-    select C_UID, C_GID, C_ADMIN, C_SCORE from TB_USER where C_USERNAME=#{username} and C_PASSWORD=#{password}
+    select
+        *
+    from
+        faq.TB_USER
+    where
+        C_USERNAME=#{username}
+    and
+        C_PASSWORD=#{password}
   </select>
 
 <!--  def delete(@Param("user")user: User)-->
-  <update id="delete" parameterType="grp.faq.entity.User">
-    update TB_USER set C_IS_DELETE=0 where C_UID=#{cUid}
+  <update id="delete">
+    update faq.TB_USER
+    set C_IS_DELETE=0
+    where C_UID=#{cUid}
   </update>
+
+<!--  def getAllUsers(): util.List[User]-->
+  <select id="getAllUsers" resultType="grp.faq.entity.User">
+    select
+        C_ADMIN, C_USERNAME, C_GID, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX, C_IS_DELETE
+    from
+        faq.TB_USER
+  </select>
 </mapper>

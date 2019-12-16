@@ -12,6 +12,7 @@ class LoginInterceptor extends HandlerInterceptor {
 
   @throws[Exception]
   override def preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean = {
+    response.setCharacterEncoding("UTF-8")
     logger.info(request.getRequestURI)
     true
   }
@@ -22,5 +23,9 @@ class LoginInterceptor extends HandlerInterceptor {
 
   @throws[Exception]
   override def afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any, ex: Exception): Unit = {
+    if(request.getRequestURL.indexOf("login") != -1){
+      val isAdmin = request.getAttribute("body")
+      println(isAdmin)
+    }
   }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grp.faq.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Message" >
+    <constructor >
+      <idArg column="C_MESSAGE_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="C_MESSAGE_SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="C_MESSAGE_TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="C_READED" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    C_MESSAGE_ID, C_MESSAGE_SOURCE, C_MESSAGE_TYPE, C_READED
+  </sql>
+<!--  def getMessage(uid: Int): util.List[Message]-->
+  <select id="getMessage" resultType="grp.faq.entity.Message">
+    select
+        TB_MESSAGE.C_MESSAGE_TYPE,
+        TB_MESSAGE.C_MESSAGE_SOURCE,
+        TB_MESSAGE.C_MESSAGE_ID
+    from
+        faq.TB_MESSAGE
+    left join
+        faq.TB_MESSAGE_USER
+    on
+        TB_MESSAGE_USER.C_MESSAGE_ID=TB_MESSAGE.C_MESSAGE_ID
+    where
+        C_READED=0 and TB_MESSAGE_USER.C_USER_ID=#{uid}
+  </select>
+</mapper>

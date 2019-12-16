@@ -1,11 +1,16 @@
 package grp.faq.service.impl
 
+import java.util
+import java.util.Date
+
+import gqp.faq.utils.MD5Utils
 import grp.faq.dao.UserMapper
 import grp.faq.entity.User
 import grp.faq.service.UserService
 import grp.faq.utils.LogHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.List
 
 @Service
 class UserServiceImpl() extends UserService with LogHelper {
@@ -15,11 +20,16 @@ class UserServiceImpl() extends UserService with LogHelper {
 
   override def login(username: String, password: String): User = {
     try{
-      userDao.login(username, password)
+      val user = userDao.login(username, MD5Utils.getMd5(password))
+      if (user != null){
+        userDao.updateLastLogin(new Date(), user.cUid)
+      }
+      user
     }
     catch {
       case e: Exception => {
         logger.error(e.toString)
+        e.printStackTrace()
         null
       }
     }
@@ -27,9 +37,10 @@ class UserServiceImpl() extends UserService with LogHelper {
 
   override def register(user: User): Boolean = {
     if(user.cAdmin == null) {
-      user.cAdmin = new Integer((1))
+      user.cAdmin = 1.asInstanceOf[Byte]
     }
-    user.cIsDelete = new Integer(0)
+    user.cIsDelete = 0.asInstanceOf[Byte]
+    user.cPassword = MD5Utils.getMd5(user.cPassword)
     try{
       userDao.insert(user)
       true
@@ -44,7 +55,7 @@ class UserServiceImpl() extends UserService with LogHelper {
   override def delete(user: User): Boolean = {
     if(user.cUid == null) return false
     try{
-      user.cIsDelete = 1
+      user.cIsDelete = 1.asInstanceOf[Byte]
       userDao.delete(user)
       true
     }
@@ -53,6 +64,29 @@ class UserServiceImpl() extends UserService with LogHelper {
         logger.error(e.toString)
         false
       }
+    }
+  }
+
+  override def getAllUsers(): List[User] = {
+    var users: List[User] = null
+    try{
+      users = userDao.getAllUsers()
+    }
+    catch {
+      case e: Exception =>
+        null
+    }
+    users
+  }
+
+  override def getUserRank(): util.List[User] = {
+    var users: util.List[User] = null
+    try{
+      users = userDao.getUserRank()
+      users
+    }catch {
+      case e: Exception =>
+        null
     }
   }
 }

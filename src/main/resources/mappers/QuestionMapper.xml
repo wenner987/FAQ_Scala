@@ -1,119 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="grp.faq.dao.QuestionMapper" >
-  <resultMap id="BaseResultMap" type="grp.faq.entity.Question" >
-    <constructor >
-      <idArg column="C_QID" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="C_UID" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="C_Q_TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_CLOSE" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="C_CREATE_TIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="C_Q_CONTEXT" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="C_G_X" jdbcType="TINYINT" javaType="java.lang.Byte" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="grp.faq.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="grp.faq.entity.Question">
+    <constructor>
+      <idArg column="C_QID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="C_UID" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_Q_TITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_CLOSE" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="C_Q_CONTEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="C_G_X" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="C_HOT" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    C_QID, C_UID, C_Q_TITLE, C_CLOSE, C_CREATE_TIME, C_Q_CONTEXT, C_G_X
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from TB_QUESTION
-    where C_QID = #{cQid,jdbcType=BIGINT}
+<!--  def getQuestionRank(@Param("index")index: Int): util.List[Question]-->
+  <select id="getQuestionRank" resultType="grp.faq.entity.Question">
+    select
+        *
+    from
+        faq.TB_QUESTION
+    where
+        C_CLOSE=0
+    order by
+        C_HOT
+    desc
+    limit
+        #{index}, 10
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from TB_QUESTION
-    where C_QID = #{cQid,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="grp.faq.entity.Question" >
-    insert into TB_QUESTION (C_QID, C_UID, C_Q_TITLE, 
-      C_CLOSE, C_CREATE_TIME, C_Q_CONTEXT, 
-      C_G_X)
-    values (#{cQid,jdbcType=BIGINT}, #{cUid,jdbcType=TINYINT}, #{cQTitle,jdbcType=VARCHAR}, 
-      #{cClose,jdbcType=TINYINT}, #{cCreateTime,jdbcType=DATE}, #{cQContext,jdbcType=VARCHAR}, 
-      #{cGX,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="grp.faq.entity.Question" >
-    insert into TB_QUESTION
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cQid != null" >
-        C_QID,
-      </if>
-      <if test="cUid != null" >
-        C_UID,
-      </if>
-      <if test="cQTitle != null" >
-        C_Q_TITLE,
-      </if>
-      <if test="cClose != null" >
-        C_CLOSE,
-      </if>
-      <if test="cCreateTime != null" >
-        C_CREATE_TIME,
-      </if>
-      <if test="cQContext != null" >
-        C_Q_CONTEXT,
-      </if>
-      <if test="cGX != null" >
-        C_G_X,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cQid != null" >
-        #{cQid,jdbcType=BIGINT},
-      </if>
-      <if test="cUid != null" >
-        #{cUid,jdbcType=TINYINT},
-      </if>
-      <if test="cQTitle != null" >
-        #{cQTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="cClose != null" >
-        #{cClose,jdbcType=TINYINT},
-      </if>
-      <if test="cCreateTime != null" >
-        #{cCreateTime,jdbcType=DATE},
-      </if>
-      <if test="cQContext != null" >
-        #{cQContext,jdbcType=VARCHAR},
-      </if>
-      <if test="cGX != null" >
-        #{cGX,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="grp.faq.entity.Question" >
-    update TB_QUESTION
-    <set >
-      <if test="cUid != null" >
-        C_UID = #{cUid,jdbcType=TINYINT},
-      </if>
-      <if test="cQTitle != null" >
-        C_Q_TITLE = #{cQTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="cClose != null" >
-        C_CLOSE = #{cClose,jdbcType=TINYINT},
-      </if>
-      <if test="cCreateTime != null" >
-        C_CREATE_TIME = #{cCreateTime,jdbcType=DATE},
-      </if>
-      <if test="cQContext != null" >
-        C_Q_CONTEXT = #{cQContext,jdbcType=VARCHAR},
-      </if>
-      <if test="cGX != null" >
-        C_G_X = #{cGX,jdbcType=TINYINT},
-      </if>
-    </set>
-    where C_QID = #{cQid,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="grp.faq.entity.Question" >
-    update TB_QUESTION
-    set C_UID = #{cUid,jdbcType=TINYINT},
-      C_Q_TITLE = #{cQTitle,jdbcType=VARCHAR},
-      C_CLOSE = #{cClose,jdbcType=TINYINT},
-      C_CREATE_TIME = #{cCreateTime,jdbcType=DATE},
-      C_Q_CONTEXT = #{cQContext,jdbcType=VARCHAR},
-      C_G_X = #{cGX,jdbcType=TINYINT}
-    where C_QID = #{cQid,jdbcType=BIGINT}
-  </update>
+
+<!--  def getTodayQuestion(): Long-->
+  <select id="getTodayQuestion" resultType="java.lang.Long">
+    select
+           count(C_QID)
+    from
+        faq.TB_QUESTION
+    where
+      TO_DAYS(C_CREATE_TIME) = TO_DAYS(NOW())
+  </select>
+
 </mapper>

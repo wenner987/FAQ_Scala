@@ -23,5 +23,20 @@ class GroupController extends LogHelper{
     json.toJSONString
   }
 
+  @RequestMapping(value = Array("/getAllGroup"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def getGroup(): String = {
+    val json: JSONObject = new JSONObject()
+    val groups = groupService.getAllGroups()
+    if(groups == null){
+      json.put("ERROR", 1)
+    }
+    else{
+      json.put("GROUPS", groups)
+      json.put("ERROR", 0)
+    }
+    json.toJSONString
+  }
+
 
 }

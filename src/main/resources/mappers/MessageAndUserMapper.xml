@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grp.faq.dao.MessageAndUserMapper" >
+  <resultMap id="BaseResultMap" type="grp.faq.entity.MessageAndUser" >
+    <constructor >
+      <idArg column="C_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="C_MESSAGE_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="C_USER_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+
+</mapper>
