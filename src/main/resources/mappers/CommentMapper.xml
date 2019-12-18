@@ -25,14 +25,35 @@
   </insert>
 <!--  def getComment(commentType: Int, commentId: Int): util.List[util.Map[Object, Object]]-->
   <select id="getComment" resultType="java.util.Map">
-    select * from 
-        <if test="commentType==1">faq.TB_ARTICLE</if>
-        <if test="commentType==2">faq.TB_ANSWER</if>
+    select
+        TB_USER.C_USERNAME, TB_COMMENT.C_CONTEXT, TB_USER.C_UID, TB_USER.C_SCORE,
+      <if test="commentType==2">
+          TB_ANSWER.C_ANSID
+      </if>
+      <if test="commentType==1">
+          TB_ARTICLE.C_ARTID
+      </if>
+    from
+        faq.TB_COMMENT
+    left join
+        faq.TB_USER
+    on
+        TB_COMMENT.C_UID = TB_USER.C_UID
+    left join
+    <if test="commentType==2">
+        TB_ANSWER
+    on
+        TB_COMMENT.C_COMMON_ID=TB_ANSWER.C_ANSID
+    </if>
+    <if test="commentType==1">
+        TB_ARTICLE
+    on
+        TB_COMMENT.C_COMMON_ID=TB_ARTICLE.C_ARTID
+    </if>
     where
-      <if test="commentType==1">C_ARTID</if>
-      <if test="commentType==2">C_ANSID</if>
-        =#{commentId}
-        and C_IS_DELETE=0
+        TB_COMMENT.C_COMMON_ID=#{commentId}
+    and
+        TB_COMMENT.C_IS_DELETE=0
   </select>
 <!--  def getCommentByQid(qid: Int): util.List[Comment]-->
   <select id="getCommentByQid" resultType="grp.faq.entity.Comment">
