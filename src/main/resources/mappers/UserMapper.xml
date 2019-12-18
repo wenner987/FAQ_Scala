@@ -70,4 +70,14 @@
   <select id="findUserByName" resultType="grp.faq.entity.User">
     select * from faq.TB_USER where C_USERNAME = #{username}
   </select>
+
+<!--  def selectUserByid(uid: Int): User-->
+  <select id="selectUserByid" resultType="grp.faq.entity.User">
+    select
+           C_UID, C_GID, C_ADMIN, C_USERNAME, C_SCORE, C_LAST_LOGIN, C_MAIL_BOX
+    from
+         faq.TB_USER
+    where
+          C_UID=#{uid} and C_IS_DELETE=0
+  </select>
 </mapper>

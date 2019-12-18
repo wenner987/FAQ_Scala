@@ -128,4 +128,14 @@ class UserServiceImpl() extends UserService with LogHelper {
         null
     }
   }
+
+  override def getUserById(uid: Int): User = {
+    try{
+      userDao.selectUserByid(uid)
+    }
+    catch{
+      case e: Exception =>
+        null
+    }
+  }
 }

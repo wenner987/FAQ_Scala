@@ -27,4 +27,13 @@
     insert into faq.TB_GROUP(C_DESC, C_IS_DELETE, C_GROUP_NAME, C_ADD_ALLOW)
     VALUES (#{cDesc}, 0, #{cGroupName}, 0)
   </insert>
+<!--  def selectGroupById(@Param("gid")gid: Int): _root_.grp.faq.entity.Group = ???-->
+  <select id="selectGroupById" resultType="grp.faq.entity.Group">
+        select
+            C_GROUP_NAME, C_DESC, C_GID
+        from
+            faq.TB_GROUP
+        where
+            C_GID=#{gid} and C_IS_DELETE=0
+  </select>
 </mapper>

@@ -40,6 +40,14 @@ class QuestionController extends LogHelper{
     }
     json.toJSONString
   }
+  @RequestMapping(value =  Array("/getQuestionNumber"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def geQuestionNumber(): String = {
+    val json = new JSONObject()
+    json.put("NUMBER", questionService.getQuestionNumber())
+    json.put("ERROR", 0)
+    json.toJSONString
+  }
   @RequestMapping(value = Array("/addQuestion"), method = Array(RequestMethod.POST))
   @ResponseBody
   def addQuestion(question: Question): String ={

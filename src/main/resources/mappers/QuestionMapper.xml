@@ -60,5 +60,9 @@
         where
               TB_QUESTION.C_QID=#{cQid}
     </select>
+<!--    def getQuestionNumber(): Int-->
+    <select id="getQuestionNumber" resultType="java.lang.Integer">
+        select count(C_QID) from faq.TB_QUESTION
+    </select>
 
 </mapper>

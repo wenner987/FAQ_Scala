@@ -7,6 +7,8 @@ import grp.faq.entity.User
 import org.apache.ibatis.annotations.Param
 
 trait UserMapper {
+  def selectUserByid(@Param("uid")uid: Int): User
+
   def findUserByName(username: String): User
 
   def findUsername(@Param("username")username: String): User

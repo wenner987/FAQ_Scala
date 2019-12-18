@@ -7,6 +7,8 @@ import grp.faq.entity.Question
 import org.apache.ibatis.annotations.Param
 
 trait QuestionMapper {
+  def getQuestionNumber(): Int
+
   def getQuestion(question: Question): Map[Object,Object]
 
   def addQuestion(question: Question): Int

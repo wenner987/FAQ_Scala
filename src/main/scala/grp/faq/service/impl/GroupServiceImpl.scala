@@ -29,4 +29,13 @@ class GroupServiceImpl extends GroupService with LogHelper {
     groupDao.getAllGroup()
   }
 
+  override def getGroupById(gid: Int): Group = {
+    try{
+      groupDao.selectGroupById(gid)
+    }
+    catch {
+      case e: Exception =>
+        null
+    }
+  }
 }

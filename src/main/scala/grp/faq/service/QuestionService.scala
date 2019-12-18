@@ -6,6 +6,8 @@ import java.util.Map
 import grp.faq.entity.Question
 
 trait QuestionService {
+  def getQuestionNumber(): Int
+
   def getQuestion(question: Question): Map[Object,Object]
 
   def addQuestion(question: Question): Boolean

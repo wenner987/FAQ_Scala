@@ -49,4 +49,8 @@ class QuestionServiceImpl extends QuestionService{
         null
     }
   }
+
+  override def getQuestionNumber(): Int = {
+    questionDao.getQuestionNumber()
+  }
 }

@@ -118,4 +118,19 @@ class UserController() extends LogHelper{
     }
     json.toJSONString
   }
+
+  @RequestMapping(value = Array("getUserById"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def getUserById(uid: Int): String = {
+    val json = new JSONObject()
+    val user: User = userService.getUserById(uid)
+    if(user != null){
+      json.put("ERROR", 0)
+      json.put("USER", user)
+    }
+    else{
+      json.put("ERROR", 1)
+    }
+    json.toJSONString
+  }
 }
