@@ -1,0 +1,3 @@
+[submodule "FAQ_Vue"]
+	path = FAQ_Vue
+	url = https://github.com/wenner987/FAQ_Vue
