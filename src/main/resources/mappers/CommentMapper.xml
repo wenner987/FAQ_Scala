@@ -33,6 +33,7 @@
       <if test="commentType==1">
           TB_ARTICLE.C_ARTID
       </if>
+      , TB_COMMENT.C_CREATE_TIME
     from
         faq.TB_COMMENT
     left join
