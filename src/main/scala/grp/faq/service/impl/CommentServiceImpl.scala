@@ -37,6 +37,7 @@ class CommentServiceImpl extends CommentService{
     var comments: util.List[Comment] = null
     try{
       comments = commentDao.getCommentByQid(qid)
+      comments
     }
     catch {
       case e: Exception =>
