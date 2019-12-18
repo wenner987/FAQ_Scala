@@ -34,4 +34,13 @@
         =#{commentId}
         and C_IS_DELETE=0
   </select>
+<!--  def getCommentByQid(qid: Int): util.List[Comment]-->
+  <select id="getCommentByQid" resultType="grp.faq.entity.Comment">
+    select
+        C_UID, C_CONTEXT, C_CREATE_TIME
+    from
+        faq.TB_COMMENT
+    where
+        C_IS_DELETE=0 and C_COM_TYPE=2 and C_COMMON_ID=#{qid}
+  </select>
 </mapper>

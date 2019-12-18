@@ -32,4 +32,15 @@ class CommentServiceImpl extends CommentService{
         null
     }
   }
+
+  override def getCommentByQid(qid: Int): util.List[Comment] = {
+    var comments: util.List[Comment] = null
+    try{
+      comments = commentDao.getCommentByQid(qid)
+    }
+    catch {
+      case e: Exception =>
+        null
+    }
+  }
 }

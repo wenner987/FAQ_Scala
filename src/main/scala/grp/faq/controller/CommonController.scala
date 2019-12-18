@@ -1,5 +1,7 @@
 package grp.faq.controller
 
+import java.util.List
+
 import com.alibaba.fastjson.JSONObject
 import grp.faq.entity.Comment
 import grp.faq.service.CommentService
@@ -28,6 +30,19 @@ class CommonController {
     val comment = commentService.getComment(commentType, commentId)
     if(comment != null){
       json.put("COMMENTS", comment)
+      json.put("ERROR", 0)
+    }
+    else{
+      json.put("ERROR", 1)
+    }
+    json.toJSONString
+  }
+  @RequestMapping(value = Array("/getCommentByQid"), method = Array(RequestMethod.POST))
+  def getCommentByQid(qid: Int): String = {
+    val json = new JSONObject()
+    val comment: List[Comment] = commentService.getCommentByQid(qid)
+    if(comment != null){
+      json.put("COMMENT", comment)
       json.put("ERROR", 0)
     }
     else{
