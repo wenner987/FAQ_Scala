@@ -1,5 +1,7 @@
 package grp.faq.service.impl
 
+import java.util
+
 import grp.faq.dao.ArticleMapper
 import grp.faq.entity.Article
 import grp.faq.service.ArticleService
@@ -57,6 +59,16 @@ class ArticleServiceImpl extends ArticleService{
     catch {
       case e: Exception =>
         false
+    }
+  }
+
+  override def getArticleByUsername(username: String, index: Int): util.List[Article] = {
+    try{
+      articleDao.getArticleByUsername(username, index)
+    }
+    catch {
+      case e: Exception =>
+        null
     }
   }
 }

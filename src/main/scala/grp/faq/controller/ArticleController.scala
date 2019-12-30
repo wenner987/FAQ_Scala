@@ -61,4 +61,19 @@ class ArticleController {
     json.put("ERROR", if(articleService.add(article)) 0 else 1)
     json.toJSONString
   }
+  @RequestMapping(value = Array("getArticleByUsername"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def getArticleByUsername(username: String, index: Int): String = {
+    val json = new JSONObject()
+    val articles = articleService.getArticleByUsername(username, index * 10)
+    if(articles == null){
+      json.put("ERROR", 1)
+    }
+    else{
+      json.put("ERROR", 0)
+      json.put("ARTICLES", articles)
+    }
+    json.toJSONString
+  }
+
 }

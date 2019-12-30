@@ -33,4 +33,11 @@
         set C_READED=1
         where C_MESSAGE_ID=#{messageId}
     </update>
+<!--    def addMessage(uid: Long): Int-->
+    <insert id="addMessage" keyProperty="true" useGeneratedKeys="true">
+        insert into
+            faq.TB_MESSAGE(C_MESSAGE_ID, C_MESSAGE_SOURCE, C_MESSAGE_TYPE, C_READED)
+        values
+            (null, #{source}, #{messageTypee}, 0)
+    </insert>
 </mapper>

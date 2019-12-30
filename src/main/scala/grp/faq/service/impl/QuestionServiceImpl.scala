@@ -3,6 +3,7 @@ package grp.faq.service.impl
 import java.util.Map
 import java.util.List
 
+import com.alibaba.fastjson.JSONObject
 import grp.faq.dao.QuestionMapper
 import grp.faq.entity.Question
 import grp.faq.service.QuestionService
@@ -52,5 +53,15 @@ class QuestionServiceImpl extends QuestionService{
 
   override def getQuestionNumber(): Int = {
     questionDao.getQuestionNumber()
+  }
+
+  override def getQuestionByUsername(username: String, index: Int): List[Question] = {
+    try{
+      questionDao.getQUestionByUsername(username, index)
+    }
+    catch {
+      case exception: Exception =>
+        null
+    }
   }
 }

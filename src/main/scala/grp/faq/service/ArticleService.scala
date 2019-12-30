@@ -4,6 +4,8 @@ import grp.faq.entity.Article
 import java.util.List
 
 trait ArticleService {
+  def getArticleByUsername(username: String, index: Int): List[Article]
+
   def add(article: Article): Boolean
 
   def getTodayArticle(): Long

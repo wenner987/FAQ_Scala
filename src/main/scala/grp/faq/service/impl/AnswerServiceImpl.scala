@@ -1,5 +1,7 @@
 package grp.faq.service.impl
 
+import java.util
+
 import grp.faq.dao.AnswerMapper
 import grp.faq.entity.Answer
 import grp.faq.service.AnswerService
@@ -16,8 +18,8 @@ class AnswerServiceImpl extends AnswerService{
     answerDao.getTodayAnswer()
   }
 
-  override def getAnswer(qid: Int): List[Map[Object,Object]]= {
-    answerDao.getAnswer(qid)
+  override def getAnswer(qid: Int, uid: Int): List[Map[Object,Object]]= {
+    answerDao.getAnswer(qid, uid)
   }
 
   override def addAnswer(answer: Answer): Boolean = {
@@ -51,6 +53,16 @@ class AnswerServiceImpl extends AnswerService{
     catch {
       case e: Exception =>
         false
+    }
+  }
+
+  override def getAnswerByUsername(username: String, index: Int): util.List[Map[String, String]] = {
+    try{
+      answerDao.getAnswerByUsername(username, index)
+    }
+    catch {
+      case exception: Exception =>
+        null
     }
   }
 }

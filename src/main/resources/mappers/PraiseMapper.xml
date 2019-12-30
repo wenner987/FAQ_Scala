@@ -13,5 +13,9 @@
   <sql id="Base_Column_List">
     C_PRAISEID, C_UID, C_PRATYPE, C_COMMON_ID, C_IS_DELETE
   </sql>
-
+<!--  def praise(praiseType: Int, id: Long, uid: Long): Int-->
+  <insert id="praise" keyProperty="true" useGeneratedKeys="true">
+    insert into faq.TB_PRAISE(C_PRAISEID, C_UID, C_PRATYPE, C_COMMON_ID, C_IS_DELETE)
+    VALUES (null, #{uid}, #{type}, #{id}, 0)
+  </insert>
 </mapper>

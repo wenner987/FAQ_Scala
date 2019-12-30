@@ -24,15 +24,11 @@
   </select>
 <!--  def getAnswer(): Answer-->
   <select id="getAnswer" resultType="java.util.Map">
-    select
-        C_ANSID, TB_ANSWER.C_UID, C_QID, C_ANS_TIME, C_ANS_CONTEXT, C_LAST_UPDATE, TB_USER.C_USERNAME
-    from
-         faq.TB_ANSWER
-    left join
-        TB_USER
-    on
-        TB_USER.C_UID=TB_ANSWER.C_UID
-    where TB_ANSWER.C_QID=#{qid} and TB_ANSWER.C_IS_DELETE=0 and TB_ANSWER.C_IS_FOLD=0
+      select
+          ans.*,
+          (select count(TB_PRAISE.C_PRAISEID) from faq.TB_PRAISE where TB_PRAISE.C_PRATYPE=0 and TB_PRAISE.C_UID=#{uid} and TB_PRAISE.C_COMMON_ID=ans.C_ANSID) as praisecnt
+      from faq.TB_ANSWER as ans
+      where ans.C_QID=#{qid};
   </select>
 <!--  def addAnswer(answer: Answer): Int-->
   <insert id="addAnswer" parameterType="grp.faq.entity.Answer">
@@ -52,4 +48,24 @@
     set C_ANS_CONTEXT=#{cAnsContext}
     where C_ANSID=#{cAnsid}
   </update>
+<!--  def getAnswerByUsername(@Param("username")username: String, @Param("index")index: Int): List[Answer]-->
+  <select id="getAnswerByUsername" resultType="java.util.Map">
+    select
+      TB_ANSWER.C_ANSID, TB_ANSWER.C_UID, TB_ANSWER.C_QID, TB_ANSWER.C_ANS_TIME, TB_ANSWER.C_ANS_CONTEXT,
+           TB_ANSWER.C_IS_DELETE, TB_ANSWER.C_LAST_UPDATE, TB_ANSWER.C_IS_FOLD, TB_QUESTION.C_Q_TITLE
+    from
+        faq.TB_ANSWER
+    left join
+        faq.TB_USER
+    on
+        TB_ANSWER.C_UID = TB_USER.C_UID
+    left join
+        faq.TB_QUESTION
+    on
+        TB_ANSWER.C_QID = TB_QUESTION.C_QID
+    where
+        TB_USER.C_IS_DELETE=0 and TB_ANSWER.C_IS_DELETE=0
+    limit
+        #{index}, 10
+  </select>
 </mapper>

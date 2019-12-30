@@ -61,4 +61,19 @@
                 #{cArtid}, #{cUid}, #{cGid}, #{cArtContext}, #{cArtTitle}, NOW(), 0, NOW(), 0, 0
                )
     </insert>
+<!--    def getArticleByUsername(@Param("username")username: String, @Param("index")index: Int): _root_.java.util.List[_root_.grp.faq.entity.Article] = ???-->
+    <select id="getArticleByUsername" resultType="grp.faq.entity.Article">
+        select
+            C_ARTID, TB_ARTICLE.C_UID, TB_ARTICLE.C_GID, C_ART_CONTEXT, C_ART_TITLE, C_ART_CTIME, TB_ARTICLE.gfC_IS_DELETE, C_LAST_UPDATE, C_BROWSE_COUNT, C_G_X
+        from
+            faq.TB_ARTICLE
+        left join
+            faq.TB_USER
+        on
+            TB_ARTICLE.C_UID = TB_USER.C_UID
+        where
+            TB_USER.C_USERNAME=#{username} and TB_USER.C_IS_DELETE=0 and TB_ARTICLE.C_IS_DELETE=0
+        limit
+            #{index}, 10
+    </select>
 </mapper>

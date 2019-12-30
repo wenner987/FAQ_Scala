@@ -22,9 +22,9 @@ class AnswerController {
   }
   @RequestMapping(value = Array("/getAnswer"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def getAnswer(qid: Int): String = {
+  def getAnswer(qid: Int, uid: Int): String = {
     val json = new JSONObject()
-    val answer = answerService.getAnswer(qid)
+    val answer = answerService.getAnswer(qid, uid)
     if(answer == null){
       json.put("ERROR", 1)
     }
@@ -53,6 +53,20 @@ class AnswerController {
   def update(answer: Answer): String = {
     val json = new JSONObject()
     json.put("ERROR", if(answerService.update(answer)) 0 else 1)
+    json.toJSONString
+  }
+  @RequestMapping(value = Array("/getAnswerByUsername"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def getAnswerByUsername(username: String, index: Int): String = {
+    val json = new JSONObject()
+    val answers = answerService.getAnswerByUsername(username, index)
+    if(answers == null){
+      json.put("ERROR", 1)
+    }
+    else{
+      json.put("ERROR", 0)
+      json.put("ANSWERS", answers)
+    }
     json.toJSONString
   }
 }

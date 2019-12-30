@@ -69,4 +69,19 @@ class QuestionController extends LogHelper{
     }
     json.toJSONString
   }
+
+  @RequestMapping(value = Array("getQuestionByUsername"), method = Array(RequestMethod.POST))
+  @ResponseBody
+  def getQuestionByUsername(username: String, index: Int): String = {
+    val json = new JSONObject()
+    val questions = questionService.getQuestionByUsername(username, index * 10)
+    if(questions == null){
+      json.put("ERROR", 1)
+    }
+    else{
+      json.put("QUESTIONS", questions)
+      json.put("ERROR", 0)
+    }
+    json.toJSONString
+  }
 }

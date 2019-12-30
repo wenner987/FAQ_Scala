@@ -64,5 +64,21 @@
     <select id="getQuestionNumber" resultType="java.lang.Integer">
         select count(C_QID) from faq.TB_QUESTION
     </select>
+<!--    def getQUestionByUsername(username: String): JSONObject-->
+    <select id="getQUestionByUsername" resultType="grp.faq.entity.Question">
+        select
+            TB_QUESTION.C_QID, TB_QUESTION.C_UID, TB_QUESTION.C_Q_TITLE, C_CLOSE, C_CREATE_TIME, C_Q_CONTEXT, C_G_X, C_HOT
+        from
+            faq.TB_QUESTION
+        left join
+            faq.TB_USER
+        on
+            TB_QUESTION.C_UID = TB_USER.C_UID
+        where
+            TB_USER.C_USERNAME=#{username} and TB_QUESTION.C_CLOSE=0
+        limit
+            #{index}, 10
+
+    </select>
 
 </mapper>
